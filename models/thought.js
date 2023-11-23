@@ -16,11 +16,13 @@ const thoughtsSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        reactions: [reactionSchema]
-            
-        
+        reactions: [reactionSchema],
+    },
+    {
+        toJSON: {
+            virtuals: true,
+        },
     }
-
 )
 
 const reactionSchema = new mongoose.Schema({
@@ -41,6 +43,12 @@ const reactionSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-})
+});
 
-module.exports = thoughtsSchema;
+thoughtsSchema.virtual('reactionCount').get(function () {
+    return this.reactions;
+}).set(reactions.length);
+
+const thoughts = model('thoughts', thoughtsSchema)
+
+module.exports = thoughts;

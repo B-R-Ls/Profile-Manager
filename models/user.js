@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-const thoughtsSchema = require('./thought')
+const thoughts = require('./thought')
 
 const userSchema = new mongoose.Schema(
     {
@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema(
         },
 
         },
-        thoughts: [thoughtsSchema],
+        thoughts: [thoughts],
 
         friends: [userSchema]
     },
@@ -36,7 +36,7 @@ const userSchema = new mongoose.Schema(
 userSchema
     .virtual('friendCount')
     .get(function () {
-        return `${this.friends}`;
+        return this.friends;
     })
     .set(friends.length)
 
