@@ -1,6 +1,6 @@
 const { Schema, Types } = require('mongoose');
 
-const thoughtsSchema = new mongoose.Schema(
+const thoughtsSchema = new Schema(
     {
         thoughtText: {
             type: String,
@@ -25,7 +25,7 @@ const thoughtsSchema = new mongoose.Schema(
     }
 )
 
-const reactionSchema = new mongoose.Schema({
+const reactionSchema = new Schema({
     reactionId: {
         type: Schema.Types.ObjectId,
         default: () => new Types.ObjectId(),

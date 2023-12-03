@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 const thoughts = require('./thought')
 
-const userSchema = new mongoose.Schema(
+const userSchema = new Schema(
     {
         title: { 
         type: String, 
@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema(
         },
         thoughts: [thoughts],
 
-        friends: [userSchema]
+        friends: [userSchema],
     },
     {
         toJSON: {

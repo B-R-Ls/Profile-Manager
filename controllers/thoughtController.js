@@ -34,6 +34,7 @@ module.exports = {
             const thought = await Thoughts.findOneAndUpdate(
                 { _id: req.params.thoughtsId },
                 { $set: req.body },
+                { runValidators: true, new: true }
             );
 
             if (!thought) {
