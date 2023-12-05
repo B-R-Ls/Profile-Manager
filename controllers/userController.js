@@ -32,7 +32,7 @@ module.exports = {
     async updateUser(req, res) {
         try {
             const user = await User.findOneAndUpdate(
-                { _id: req.params.thoughtsId },
+                { _id: req.params.userId },
                 { $set: req.body },
             );
 
@@ -76,7 +76,11 @@ module.exports = {
     },
     async deleteFriend(req, res) {
         try {
-            const friend = await User.findOneAndDelete({ _id: req.params.friendsId });
+            const friend = await User.findOneAndUpdate(
+                { _id: req.params.userId },
+                { $pull: { friends: { _id: req.params.friendId } } },
+                { runValidators: true, new: true }
+                );
             
             if (!friend) {
                 res.status(404).json({ message: 'No users with that ID'})
